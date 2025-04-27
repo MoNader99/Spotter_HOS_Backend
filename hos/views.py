@@ -1,24 +1,40 @@
 import math
 import requests
+import json
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from Spotter_HOS import settings
 from .models import Trip, DrivingLog, DailyLogSheet
-from .serializers import DailyLogSheetSerializer, DrivingLogSerializer, TripSerializer
+from .serializers import DailyLogSheetSerializer, DrivingLogSerializer, TripSerializer, SimplifiedTripSerializer
 from rest_framework import status
 from datetime import datetime
 from django.utils import timezone
 from .utils import HOSCalculator
+from .permissions import IsAdminOrSupervisor, IsDriver, IsTripDriver, IsTripDriverOrAdmin
+from rest_framework.permissions import IsAuthenticated
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 class TripCreateView(generics.CreateAPIView):
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
-    permission_classes = []
+    permission_classes = [IsAuthenticated, IsAdminOrSupervisor]
 
     def perform_create(self, serializer):
         trip = serializer.save()
         _calculate_trip_info(trip)
+        
+        # Send WebSocket notification
+        channel_layer = get_channel_layer()
+        trip_data = TripSerializer(trip).data
+        async_to_sync(channel_layer.group_send)(
+            'all_trips',
+            {
+                'type': 'trip_created',
+                'trip': trip_data
+            }
+        )
         
     def geocode_location(self, address):
         url = "https://nominatim.openstreetmap.org/search"
@@ -38,7 +54,7 @@ class TripCreateView(generics.CreateAPIView):
         return None
 
 class TripRouteView(APIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
         try:
@@ -143,7 +159,7 @@ class TripRouteView(APIView):
 class TripDetailView(generics.RetrieveAPIView):
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
-    permission_classes = []
+    permission_classes = [IsAuthenticated, IsTripDriverOrAdmin]
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -152,7 +168,7 @@ class TripDetailView(generics.RetrieveAPIView):
         return Response(serializer.data)
 
 class CompleteTripView(APIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated, IsTripDriver]
 
     def post(self, request, pk):
         try:
@@ -169,7 +185,7 @@ class CompleteTripView(APIView):
             return Response({"error": "Trip not found."}, status=status.HTTP_404_NOT_FOUND)
 
 class TripDailyLogsView(APIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated, IsTripDriver]
     
     def get(self, request, pk):
         trip = Trip.objects.get(pk=pk)
@@ -181,7 +197,7 @@ class TripDailyLogsView(APIView):
         })
 
 class AddLogView(APIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated, IsTripDriver]
 
     def post(self, request, pk):
         try:
@@ -198,7 +214,43 @@ class AddLogView(APIView):
                     trip.current_location = request.data['location']
                     if trip.status == 'NOT_STARTED':
                         trip.status = 'IN_PROGRESS'
+                    
+                    # Check if driver has arrived at the drop-off location
+                    if trip.current_location.lower() == trip.dropoff_location.lower():
+                        trip.status = 'COMPLETED'
+                    
                     trip.save()
+                    
+                    # Send WebSocket notification for trip update
+                    channel_layer = get_channel_layer()
+                    trip_data = TripSerializer(trip).data
+                    async_to_sync(channel_layer.group_send)(
+                        f'trip_{trip.id}',
+                        {
+                            'type': 'trip_update',
+                            'trip': trip_data
+                        }
+                    )
+                    
+                    # Also notify the all_trips group
+                    async_to_sync(channel_layer.group_send)(
+                        'all_trips',
+                        {
+                            'type': 'trip_updated',
+                            'trip': trip_data
+                        }
+                    )
+                
+                # Send WebSocket notification for log update
+                channel_layer = get_channel_layer()
+                log_data = DrivingLogSerializer(log).data
+                async_to_sync(channel_layer.group_send)(
+                    f'trip_{trip.id}',
+                    {
+                        'type': 'log_update',
+                        'log': log_data
+                    }
+                )
 
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -207,44 +259,8 @@ class AddLogView(APIView):
         except Trip.DoesNotExist:
             return Response({"error": "Trip not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    permission_classes = []
-    
-    def post(self, request, pk):
-        try:
-            trip = Trip.objects.get(pk=pk)
-            
-            # Check if trip is completed
-            if trip.status == 'COMPLETED':
-                return Response(
-                    {"error": "Cannot add logs to completed trips"},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-            
-            # Update trip status to in progress if it's the first log
-            if trip.status == 'NOT_STARTED':
-                trip.status = 'IN_PROGRESS'
-                trip.save()
-            
-            serializer = DrivingLogSerializer(data=request.data)
-            if serializer.is_valid():
-                log = serializer.save(trip=trip)
-                
-                # Update current location if provided
-                if 'location' in request.data:
-                    trip.current_location = request.data['location']
-                    trip.save()
-                
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            
-        except Trip.DoesNotExist:
-            return Response(
-                {"error": "Trip not found"},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
 class DailyLogView(APIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated, IsTripDriver]
     
     def get(self, request, pk, date):
         try:
@@ -289,7 +305,7 @@ class DailyLogView(APIView):
 class DailyLogGenerator(APIView):
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
-    permission_classes = []
+    permission_classes = [IsAuthenticated, IsTripDriver]
 
     def perform_create(self, serializer):
         trip = serializer.save()
@@ -338,8 +354,6 @@ class DailyLogGenerator(APIView):
                 return (lat, lon)  # return (lat, lon)
         return None
 
-    permission_classes = []
-    
     def post(self, request, pk):
         trip = Trip.objects.get(pk=pk)
         date = request.data.get('date', timezone.now().date())
@@ -380,6 +394,87 @@ class DailyLogGenerator(APIView):
         )
         
         return Response(DailyLogSheetSerializer(daily_log).data)
+
+# New view for drivers to assign trips to themselves
+class AssignTripView(APIView):
+    permission_classes = [IsAuthenticated, IsDriver]
+    
+    def post(self, request, pk):
+        try:
+            trip = Trip.objects.get(pk=pk)
+            
+            # Check if trip is already assigned
+            if trip.driver:
+                return Response(
+                    {"error": "Trip is already assigned to a driver"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Check if trip is completed
+            if trip.status == 'COMPLETED':
+                return Response(
+                    {"error": "Cannot assign completed trips"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Assign trip to the current user
+            trip.driver = request.user
+            trip.save()
+            
+            # Send WebSocket notification
+            channel_layer = get_channel_layer()
+            trip_data = TripSerializer(trip).data
+            async_to_sync(channel_layer.group_send)(
+                f'trip_{trip.id}',
+                {
+                    'type': 'trip_update',
+                    'trip': trip_data
+                }
+            )
+            
+            # Also notify the all_trips group
+            async_to_sync(channel_layer.group_send)(
+                'all_trips',
+                {
+                    'type': 'trip_updated',
+                    'trip': trip_data
+                }
+            )
+            
+            return Response({
+                "message": f"Trip successfully assigned to {request.user.username}",
+                "trip_id": trip.id
+            }, status=status.HTTP_200_OK)
+            
+        except Trip.DoesNotExist:
+            return Response(
+                {"error": "Trip not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+# New view for listing available trips (unassigned trips)
+class AvailableTripsView(generics.ListAPIView):
+    serializer_class = SimplifiedTripSerializer
+    permission_classes = [IsAuthenticated, IsDriver]
+    
+    def get_queryset(self):
+        return Trip.objects.filter(driver__isnull=True, status__in=['NOT_STARTED', 'IN_PROGRESS'])
+
+# New view for listing driver's assigned trips
+class DriverTripsView(generics.ListAPIView):
+    serializer_class = TripSerializer
+    permission_classes = [IsAuthenticated, IsDriver]
+    
+    def get_queryset(self):
+        return Trip.objects.filter(driver=self.request.user)
+
+# New view for admins/supervisors to list all trips
+class AllTripsView(generics.ListAPIView):
+    serializer_class = TripSerializer
+    permission_classes = [IsAuthenticated, IsAdminOrSupervisor]
+    
+    def get_queryset(self):
+        return Trip.objects.all()
      
 def _calculate_trip_info(trip):
     import math

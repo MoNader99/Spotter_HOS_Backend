@@ -22,3 +22,8 @@ class TripSerializer(serializers.ModelSerializer):
             'driver': {'required': False},  # Make driver optional
             'current_cycle_used': {'required': False}  # Also optional
         }
+
+class SimplifiedTripSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Trip
+        fields = ['id', 'status', 'pickup_location', 'dropoff_location', 'created_at']
