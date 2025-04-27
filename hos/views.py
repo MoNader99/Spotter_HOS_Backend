@@ -15,6 +15,7 @@ from .permissions import IsAdminOrSupervisor, IsDriver, IsTripDriver, IsTripDriv
 from rest_framework.permissions import IsAuthenticated
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+import polyline
 
 class TripCreateView(generics.CreateAPIView):
     queryset = Trip.objects.all()
@@ -64,7 +65,10 @@ class TripRouteView(APIView):
             dropoff_coords = self.geocode_location(trip.dropoff_location)
 
             if not pickup_coords or not dropoff_coords:
-                return Response({"error": "Could not geocode locations"}, status=400)
+                return Response(
+                    {"detail": "Could not geocode locations"}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
             directions_url = "https://api.openrouteservice.org/v2/directions/driving-car"
             headers = {
@@ -81,63 +85,109 @@ class TripRouteView(APIView):
             response = requests.post(directions_url, json=body, headers=headers)
 
             if response.status_code != 200:
-                return Response({"error": "Error fetching route"}, status=400)
+                return Response(
+                    {"detail": "Error fetching route"}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
             data = response.json()
 
             if 'routes' not in data or not data['routes']:
-                return Response({"error": "No routes found"}, status=400)
+                return Response(
+                    {"detail": "No routes found"}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
-            route_info = data['routes'][0]
-            summary = route_info['summary']
-            steps = route_info['segments'][0]['steps']
+            route = data['routes'][0]
+            
+            # Decode the polyline geometry
+            try:
+                # The geometry is a polyline string
+                decoded_coords = polyline.decode(route['geometry'])
+                # Convert to [lat, lng] format (OpenRouteService uses [lng, lat])
+                coordinates = [[coord[0], coord[1]] for coord in decoded_coords]
+            except Exception as e:
+                # Fallback to using waypoints if polyline decoding fails
+                coordinates = []
+                for segment in route['segments']:
+                    for step in segment['steps']:
+                        for way_point in step['way_points']:
+                            # Get the actual coordinate from the geometry
+                            if 'coordinates' in route['geometry']:
+                                coord = route['geometry']['coordinates'][way_point]
+                                coordinates.append([coord[1], coord[0]])
+            
+            # Remove duplicates while preserving order
+            coordinates = list(dict.fromkeys(map(tuple, coordinates)))
+            coordinates = [list(coord) for coord in coordinates]
 
-            total_distance_miles = summary['distance'] / 1000 * 0.621371  # meters ➔ miles
-            total_duration_hours = summary['duration'] / 3600  # seconds ➔ hours
-
-            # Add 1 hour pickup and 1 hour drop-off
-            total_duration_hours += 2
-
-            # Fuel stops every 1000 miles
-            fuel_stops = math.floor(total_distance_miles / 1000)
-
-            route_steps = []
-            miles_counter = 0
-
-            for step in steps:
-                miles = step['distance'] / 1000 * 0.621371
-                duration_hours = step['duration'] / 3600
-
-                route_steps.append({
-                    'instruction': step['instruction'],
-                    'distance_miles': f"{miles:.2f}",
-                    'estimated_time_hours': f"{duration_hours:.2f}",
-                })
-
-                miles_counter += miles
-                if miles_counter >= 1000:
-                    # Add fuel stop
-                    route_steps.append({
-                        'instruction': 'Recommended fuel stop',
-                        'distance_miles': '0.00',
-                        'estimated_time_hours': '1.00',  # Assume 1 hour fuel stop
+            # Process steps
+            steps = []
+            for segment in route['segments']:
+                for step in segment['steps']:
+                    steps.append({
+                        "instruction": step['instruction'],
+                        "distance_miles": round(step['distance'] / 1000 * 0.621371, 2),  # meters to miles
+                        "estimated_time_hours": round(step['duration'] / 3600, 2)  # seconds to hours
                     })
-                    miles_counter = 0  # reset counter after fuel stop
 
+            # Calculate totals
+            total_distance_miles = round(route['summary']['distance'] / 1000 * 0.621371, 2)
+            total_time_hours = round(route['summary']['duration'] / 3600, 2)
+
+            # Add 1 hour for pickup and 1 hour for drop-off
+            total_time_hours += 2
+
+            # Calculate fuel stops (every 500 miles)
+            fuel_stops = []
+            miles_so_far = 0
+            fuel_stop_distance = 500  # miles between fuel stops
+            
+            # Find coordinates for fuel stops
+            for i in range(len(coordinates) - 1):
+                # Calculate distance between current and next coordinate
+                lat1, lon1 = coordinates[i]
+                lat2, lon2 = coordinates[i + 1]
+                
+                # Simple distance calculation (not as accurate as Haversine but sufficient for this purpose)
+                segment_distance = self.calculate_distance(lat1, lon1, lat2, lon2)
+                miles_so_far += segment_distance
+                
+                # If we've reached a fuel stop distance
+                if miles_so_far >= fuel_stop_distance:
+                    # Reset counter
+                    miles_so_far = 0
+                    
+                    # Use the current coordinate as the fuel stop location
+                    fuel_stop_coord = coordinates[i]
+                    
+                    # Find nearby gas stations
+                    gas_stations = self.find_nearby_gas_stations(fuel_stop_coord[0], fuel_stop_coord[1])
+                    
+                    # Add fuel stop with gas stations
+                    fuel_stops.append({
+                        "location": fuel_stop_coord,
+                        "distance_from_start": round(sum(self.calculate_distance(coordinates[j][0], coordinates[j][1], 
+                                                                              coordinates[j+1][0], coordinates[j+1][1]) 
+                                                      for j in range(i)), 2),
+                        "gas_stations": gas_stations
+                    })
+            
             route_response = {
-                'trip_id': trip.id,
-                'pickup_location': trip.pickup_location,
-                'dropoff_location': trip.dropoff_location,
-                'total_distance_miles': f"{total_distance_miles:.2f}",
-                'estimated_total_time_hours': f"{total_duration_hours:.2f}",
-                'fuel_stops': fuel_stops,
-                'steps': route_steps,
+                "coordinates": coordinates,
+                "steps": steps,
+                "total_distance_miles": total_distance_miles,
+                "estimated_total_time_hours": total_time_hours,
+                "fuel_stops": fuel_stops
             }
 
-            return Response(route_response, status=200)
+            return Response(route_response, status=status.HTTP_200_OK)
 
         except Trip.DoesNotExist:
-            return Response({"error": "Trip not found"}, status=404)
+            return Response(
+                {"detail": "Trip not found"}, 
+                status=status.HTTP_404_NOT_FOUND
+            )
 
     def geocode_location(self, address):
         url = "https://nominatim.openstreetmap.org/search"
@@ -155,11 +205,66 @@ class TripRouteView(APIView):
                 lon = float(data[0]['lon'])
                 return (lat, lon)
         return None
-    
+        
+    def calculate_distance(self, lat1, lon1, lat2, lon2):
+        """Calculate distance between two points in miles using the Haversine formula"""
+        R = 3959  # Earth's radius in miles
+        
+        lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
+        
+        a = math.sin(dlat/2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon/2)**2
+        c = 2 * math.asin(math.sqrt(a))
+        
+        return R * c
+        
+    def find_nearby_gas_stations(self, lat, lon, radius=5):
+        """Find gas stations near the given coordinates"""
+        # Use OpenStreetMap's Overpass API to find gas stations
+        overpass_url = "https://overpass-api.de/api/interpreter"
+        query = f"""
+        [out:json][timeout:25];
+        (
+          node["amenity"="fuel"](around:{radius*1000},{lat},{lon});
+          way["amenity"="fuel"](around:{radius*1000},{lat},{lon});
+          relation["amenity"="fuel"](around:{radius*1000},{lat},{lon});
+        );
+        out body;
+        >;
+        out skel qt;
+        """
+        
+        try:
+            response = requests.post(overpass_url, data=query)
+            if response.status_code == 200:
+                data = response.json()
+                gas_stations = []
+                
+                for element in data.get('elements', []):
+                    if 'lat' in element and 'lon' in element:
+                        gas_stations.append({
+                            "name": element.get('tags', {}).get('name', 'Unknown Gas Station'),
+                            "brand": element.get('tags', {}).get('brand', 'Unknown Brand'),
+                            "location": [element['lat'], element['lon']],
+                            "distance": round(self.calculate_distance(lat, lon, element['lat'], element['lon']), 2)
+                        })
+                
+                # Sort by distance
+                gas_stations.sort(key=lambda x: x['distance'])
+                
+                # Return top 5 closest stations
+                return gas_stations[:5]
+        except Exception as e:
+            print(f"Error finding gas stations: {e}")
+        
+        # Return empty list if no stations found or error occurred
+        return []
+
 class TripDetailView(generics.RetrieveAPIView):
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
-    permission_classes = [IsAuthenticated, IsTripDriverOrAdmin]
+    permission_classes = [IsAuthenticated]
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -454,11 +559,11 @@ class AssignTripView(APIView):
 
 # New view for listing available trips (unassigned trips)
 class AvailableTripsView(generics.ListAPIView):
-    serializer_class = SimplifiedTripSerializer
-    permission_classes = [IsAuthenticated, IsDriver]
-    
+    serializer_class = TripSerializer
+    permission_classes = [IsAuthenticated]
+
     def get_queryset(self):
-        return Trip.objects.filter(driver__isnull=True, status__in=['NOT_STARTED', 'IN_PROGRESS'])
+        return Trip.objects.filter(driver__isnull=True, status='NOT_STARTED')
 
 # New view for listing driver's assigned trips
 class DriverTripsView(generics.ListAPIView):
@@ -475,7 +580,14 @@ class AllTripsView(generics.ListAPIView):
     
     def get_queryset(self):
         return Trip.objects.all()
-     
+
+class DriverAssignedTripsView(generics.ListAPIView):
+    serializer_class = TripSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Trip.objects.filter(driver=self.request.user)
+
 def _calculate_trip_info(trip):
     import math
 

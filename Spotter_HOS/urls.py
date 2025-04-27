@@ -3,7 +3,8 @@ from django.urls import path, re_path
 from hos.views import (
     AddLogView, CompleteTripView, DailyLogView, TripCreateView, 
     TripDetailView, TripRouteView, TripDailyLogsView, DailyLogGenerator,
-    AssignTripView, AvailableTripsView, DriverTripsView, AllTripsView
+    AssignTripView, AvailableTripsView, DriverTripsView, AllTripsView,
+    DriverAssignedTripsView
 )
 from hos.auth import UserRegistrationView, UserLoginView, UserProfileView
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -21,7 +22,7 @@ urlpatterns = [
     re_path(r'^api/trips/?$', TripCreateView.as_view(), name='trip-create'),
     re_path(r'^api/trips/all/?$', AllTripsView.as_view(), name='all-trips'),
     re_path(r'^api/trips/available/?$', AvailableTripsView.as_view(), name='available-trips'),
-    re_path(r'^api/trips/my-trips/?$', DriverTripsView.as_view(), name='driver-trips'),
+    re_path(r'^api/trips/my-trips/?$', DriverAssignedTripsView.as_view(), name='driver-assigned-trips'),
     re_path(r'^api/trips/(?P<pk>\d+)/$', TripDetailView.as_view(), name='trip-detail'),
     re_path(r'^api/trips/(?P<pk>\d+)/route/$', TripRouteView.as_view(), name='trip-route'),
     re_path(r'^api/trips/(?P<pk>\d+)/complete/$', CompleteTripView.as_view(), name='trip-complete'),

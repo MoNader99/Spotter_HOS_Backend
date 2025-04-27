@@ -1,5 +1,13 @@
 from rest_framework import serializers
 from .models import Trip, DrivingLog, DailyLogSheet
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email']
 
 class DrivingLogSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +22,7 @@ class DailyLogSheetSerializer(serializers.ModelSerializer):
 class TripSerializer(serializers.ModelSerializer):
     logs = DrivingLogSerializer(many=True, read_only=True)
     daily_logs = DailyLogSheetSerializer(many=True, read_only=True)
+    driver = UserSerializer(read_only=True)
 
     class Meta:
         model = Trip
