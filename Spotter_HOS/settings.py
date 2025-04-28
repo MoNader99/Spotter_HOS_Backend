@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-#d+@(#3z6bt((3(8576g94an6s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['spotter-hos-backend.vercel.app', '.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["http://localhost:3000","https://spotter-hos-frontend.vercel.app", '.vercel.app', '127.0.0.1']
 
 
 # Application definition
