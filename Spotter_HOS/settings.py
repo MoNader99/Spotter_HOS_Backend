@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#d+@(#3z6bt((3(8576g94an6swr9)#(743jtqdl2b@ig=h)z1'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-#d+@(#3z6bt((3(8576g94an6swr9)#(743jtqdl2b@ig=h)z1')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['yourusername.pythonanywhere.com']  # Replace with your PythonAnywhere domain
+ALLOWED_HOSTS = ['spotter-hos-backend.vercel.app', '.vercel.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -146,7 +150,7 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://your-frontend-domain.com",  # Update with your frontend domain
+    "https://spotter-hos-frontend.vercel.app",
 ]
 
 # Additional CORS settings
@@ -179,7 +183,7 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
 
-OPENROUTESERVICE_API_KEY = '5b3ce3597851110001cf6248c3edb5f3db8e4ad6b91fb89ecf083bd9'
+OPENROUTESERVICE_API_KEY = os.getenv('OPENROUTESERVICE_API_KEY', '5b3ce3597851110001cf6248c3edb5f3db8e4ad6b91fb89ecf083bd9')
 
 # JWT settings
 SIMPLE_JWT = {
@@ -199,5 +203,9 @@ CHANNEL_LAYERS = {
 
 # Add CSRF trusted origins
 CSRF_TRUSTED_ORIGINS = [
-    'https://yourusername.pythonanywhere.com',  # Update with your PythonAnywhere domain
+    'https://spotter-hos-backend.vercel.app',
+    'https://spotter-hos-frontend.vercel.app',
 ]
+
+# Configure WhiteNoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
