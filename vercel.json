@@ -3,7 +3,11 @@
     {
       "src": "Spotter_HOS/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.11" }
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.11",
+        "includeFiles": ["**/*.sqlite3"]
+      }
     }
   ],
   "routes": [
@@ -15,5 +19,9 @@
       "src": "/(.*)",
       "dest": "Spotter_HOS/wsgi.py"
     }
-  ]
+  ],
+  "env": {
+    "PYTHONPATH": ".",
+    "DJANGO_SETTINGS_MODULE": "Spotter_HOS.settings"
+  }
 }

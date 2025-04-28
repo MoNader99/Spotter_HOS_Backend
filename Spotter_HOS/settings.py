@@ -85,10 +85,19 @@ WSGI_APPLICATION = 'Spotter_HOS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Get the base directory for the database
+DB_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
+
+# Ensure the directory exists
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DB_PATH,
+        'OPTIONS': {
+            'timeout': 20,  # in seconds
+        }
     }
 }
 
