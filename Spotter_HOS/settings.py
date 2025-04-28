@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#d+@(#3z6bt((3(8576g94an6swr9)#(743jtqdl2b@ig=h)z1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']  # Allow all hosts in development
+ALLOWED_HOSTS = ['yourusername.pythonanywhere.com']  # Replace with your PythonAnywhere domain
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -145,8 +146,7 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://your-frontend-domain.vercel.app",  # Add your frontend domain here
+    "https://your-frontend-domain.com",  # Update with your frontend domain
 ]
 
 # Additional CORS settings
@@ -172,9 +172,9 @@ CORS_ALLOW_HEADERS = [
 ]
 
 # Security settings
-SECURE_SSL_REDIRECT = False  # Set to True in production
-SESSION_COOKIE_SECURE = False  # Set to True in production
-CSRF_COOKIE_SECURE = False  # Set to True in production
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
@@ -199,6 +199,5 @@ CHANNEL_LAYERS = {
 
 # Add CSRF trusted origins
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.vercel.app',
-    'https://*.now.sh',
+    'https://yourusername.pythonanywhere.com',  # Update with your PythonAnywhere domain
 ]

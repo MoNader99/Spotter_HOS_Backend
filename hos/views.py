@@ -143,33 +143,52 @@ class TripRouteView(APIView):
             miles_so_far = 0
             fuel_stop_distance = 500  # miles between fuel stops
             
-            # Find coordinates for fuel stops
+            # Pre-calculate cumulative distances for each coordinate
+            cumulative_distances = [0]
             for i in range(len(coordinates) - 1):
-                # Calculate distance between current and next coordinate
                 lat1, lon1 = coordinates[i]
                 lat2, lon2 = coordinates[i + 1]
-                
-                # Simple distance calculation (not as accurate as Haversine but sufficient for this purpose)
                 segment_distance = self.calculate_distance(lat1, lon1, lat2, lon2)
-                miles_so_far += segment_distance
-                
+                cumulative_distances.append(cumulative_distances[-1] + segment_distance)
+            
+            # Find coordinates for fuel stops
+            for i in range(len(coordinates) - 1):
                 # If we've reached a fuel stop distance
-                if miles_so_far >= fuel_stop_distance:
-                    # Reset counter
-                    miles_so_far = 0
-                    
+                if cumulative_distances[i] >= fuel_stop_distance * (len(fuel_stops) + 1):
                     # Use the current coordinate as the fuel stop location
                     fuel_stop_coord = coordinates[i]
                     
-                    # Find nearby gas stations
-                    gas_stations = self.find_nearby_gas_stations(fuel_stop_coord[0], fuel_stop_coord[1])
+                    # Find gas stations in a single batch search with a larger radius
+                    gas_stations = self.find_nearby_gas_stations(fuel_stop_coord[0], fuel_stop_coord[1], radius=25)
+                    
+                    # If no gas stations found at the exact location, try nearby coordinates
+                    if not gas_stations:
+                        # Look for stations within 50 miles (both before and after)
+                        search_range = 50  # miles
+                        search_coords = []
+                        
+                        # Add coordinates before the fuel stop
+                        for j in range(i, max(0, i - 10), -1):
+                            if cumulative_distances[i] - cumulative_distances[j] <= search_range:
+                                search_coords.append(coordinates[j])
+                        
+                        # Add coordinates after the fuel stop
+                        for j in range(i + 1, min(len(coordinates), i + 11)):
+                            if cumulative_distances[j] - cumulative_distances[i] <= search_range:
+                                search_coords.append(coordinates[j])
+                        
+                        # Search for gas stations in all coordinates in parallel
+                        for coord in search_coords:
+                            stations = self.find_nearby_gas_stations(coord[0], coord[1], radius=10)
+                            if stations:
+                                gas_stations = stations
+                                fuel_stop_coord = coord
+                                break
                     
                     # Add fuel stop with gas stations
                     fuel_stops.append({
                         "location": fuel_stop_coord,
-                        "distance_from_start": round(sum(self.calculate_distance(coordinates[j][0], coordinates[j][1], 
-                                                                              coordinates[j+1][0], coordinates[j+1][1]) 
-                                                      for j in range(i)), 2),
+                        "distance_from_start": round(cumulative_distances[i], 2),
                         "gas_stations": gas_stations
                     })
             

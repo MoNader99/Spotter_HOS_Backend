@@ -6,7 +6,7 @@ import math
 from datetime import datetime, timedelta
 
 # Setup Django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Spotter_HOS.settings')  # <-- change 'your_project_name'
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Spotter_HOS.settings')
 django.setup()
 
 from hos.models import Trip, DrivingLog, DailyLogSheet
@@ -23,7 +23,8 @@ POST_TRIP_MINUTES = 30
 MORNING_OFF_DUTY_MINUTES = 30
 PARKING_OFF_DUTY_MINUTES = 30
 
-START_DATE = datetime(2025, 4, 26, 7, 0)  # Starting at 7 AM
+# Start at midnight
+START_DATE = datetime(2025, 4, 26, 0, 0)  # Starting at 12:00 AM
 
 # === Create Trip ===
 trip = Trip.objects.create(
@@ -39,23 +40,10 @@ print(f"Created Trip ID: {trip.id}")
 # === Generate Logs ===
 remaining_miles = TOTAL_MILES
 current_datetime = START_DATE
-first_day = True
 
 while remaining_miles > 0:
     day_start = current_datetime.date()
-
-    # If first day, fill missing midnight to start time with OFF duty
-    if first_day and current_datetime.time() != datetime.min.time():
-        midnight = datetime.combine(current_datetime.date(), datetime.min.time())
-        DrivingLog.objects.create(
-            trip=trip,
-            status='OFF',
-            location=trip.current_location,
-            remarks='Off duty before trip start',
-            start_time=midnight,
-            end_time=current_datetime
-        )
-        first_day = False
+    day_end = datetime.combine(day_start, datetime.max.time()) - timedelta(microseconds=1)
 
     # 1. Morning OFF Duty (getting ready)
     log_start = current_datetime
@@ -153,17 +141,19 @@ while remaining_miles > 0:
     current_datetime = log_end
 
     # 8. Sleeper Berth (fill remaining time until midnight)
-    end_of_day = datetime.combine(current_datetime.date(), datetime.min.time()) + timedelta(days=1)
-    if current_datetime < end_of_day:
+    if current_datetime < day_end:
         DrivingLog.objects.create(
             trip=trip,
             status='SB',
             location='Truck Stop Sleeper',
             remarks='Sleeper berth rest',
             start_time=current_datetime,
-            end_time=end_of_day
+            end_time=day_end
         )
-        current_datetime = end_of_day
+        current_datetime = day_end
+
+    # Move to next day
+    current_datetime = datetime.combine(day_start + timedelta(days=1), datetime.min.time())
 
     # === Daily Log Summary ===
     day_logs = DrivingLog.objects.filter(trip=trip, date=day_start)
@@ -187,9 +177,4 @@ while remaining_miles > 0:
         sleeper_berth_hours=round(sleeper_berth_hours_total, 2)
     )
 
-# === Mark Trip as Completed ===
-trip.current_location = DROPOFF
-trip.status = 'COMPLETED'
-trip.save()
-
-print(f"Trip {trip.id} completed and logs generated.")
+print(f"Trip {trip.id} created and logs generated. Trip is in progress.")
