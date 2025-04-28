@@ -1,0 +1,2590 @@
+[
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "supervisors",
+    "permissions": [
+      33,
+      34,
+      35,
+      36,
+      29,
+      30,
+      31,
+      32,
+      25,
+      26,
+      27,
+      28
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 2,
+  "fields": {
+    "name": "drivers",
+    "permissions": [
+      36,
+      29,
+      32,
+      26,
+      28
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$mQaLrvzjbrG4QkE6Q8Rg9r$eb8PmMDxHRTdgMt06SOWbDCayhYnXLn83/1Y8Q4WTj0=",
+    "last_login": "2025-04-26T14:06:42.623Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "mnader93@yahoo.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-04-26T13:15:16.342Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$HMp95rCXmSiRO1BUW9EsDD$YwLVEjwhfefXDpb3hbXdGfGL9TD1kim/nqQ0zxSzc3w=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "driver1",
+    "first_name": "",
+    "last_name": "",
+    "email": "driver1@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-27T17:34:22.822Z",
+    "groups": [
+      2
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$hPqtIJMw8ME9VzlkvBLx7X$+rxfKOkzG+3tG/2f7en5IvA27Aw3brzo/TYlplx3p5o=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "driver2",
+    "first_name": "",
+    "last_name": "",
+    "email": "driver1@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-27T20:01:03.651Z",
+    "groups": [
+      2
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "7gtgax8ymmfvckc7utm2jz23qsuxlip5",
+  "fields": {
+    "session_data": ".eJxVjEEKwyAQAP_iuUhFV02PvfcNsqtrTVsUYnIq_XsRckiuM8N8RcBtLWHrvIQ5iZtQ4nJkhPHNdYj0wvpsMra6LjPJkcjddvloiT_3vT0NCvYyts45tmDYAUTkbDREk4GItLpmr1GTtd4SqQmRk9KewaDClPOE5Ej8_uq0OMA:1u8fQ0:gx3tciLvSLXIH_elMOga6Zbgi0OCR4sfQEGE65xgzgQ",
+    "expire_date": "2025-05-10T13:18:08.562Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "hah0t2ggyaqd9qdbx39fikuwyl93294d",
+  "fields": {
+    "session_data": ".eJxVjEEKwyAQAP_iuUhFV02PvfcNsqtrTVsUYnIq_XsRckiuM8N8RcBtLWHrvIQ5iZtQ4nJkhPHNdYj0wvpsMra6LjPJkcjddvloiT_3vT0NCvYyts45tmDYAUTkbDREk4GItLpmr1GTtd4SqQmRk9KewaDClPOE5Ej8_uq0OMA:1u8gB0:EKB-q-uY_ulX4aUJfUdT1W0yLabeVXLQhtKo8gxEMZ4",
+    "expire_date": "2025-05-10T14:06:42.624Z"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 8,
+  "fields": {
+    "driver": null,
+    "current_location": "Los Angeles, CA",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": 2795.0,
+    "estimated_driving_time": 46.85,
+    "created_at": "2025-04-26T19:04:48.176Z",
+    "status": "COMPLETED"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 9,
+  "fields": {
+    "driver": null,
+    "current_location": "Los Angeles, CA",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": 2795.0,
+    "estimated_driving_time": 46.85,
+    "created_at": "2025-04-26T19:35:10.743Z",
+    "status": "COMPLETED"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 10,
+  "fields": {
+    "driver": null,
+    "current_location": "New York, NY",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": 2795.0,
+    "estimated_driving_time": 46.85,
+    "created_at": "2025-04-26T19:50:07.215Z",
+    "status": "IN_PROGRESS"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 11,
+  "fields": {
+    "driver": null,
+    "current_location": "New York, NY",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": 2795.0,
+    "estimated_driving_time": 46.85,
+    "created_at": "2025-04-26T19:54:20.048Z",
+    "status": "IN_PROGRESS"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 12,
+  "fields": {
+    "driver": null,
+    "current_location": "New York, NY",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": null,
+    "estimated_driving_time": null,
+    "created_at": "2025-04-26T19:55:28.365Z",
+    "status": "IN_PROGRESS"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 13,
+  "fields": {
+    "driver": null,
+    "current_location": "New York, NY",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": null,
+    "estimated_driving_time": null,
+    "created_at": "2025-04-26T19:58:07.452Z",
+    "status": "IN_PROGRESS"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 14,
+  "fields": {
+    "driver": null,
+    "current_location": "Los Angeles, CA",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": 2795.0,
+    "estimated_driving_time": 46.85,
+    "created_at": "2025-04-26T19:58:11.132Z",
+    "status": "COMPLETED"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 15,
+  "fields": {
+    "driver": 2,
+    "current_location": "Highway",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": 2795.0,
+    "estimated_driving_time": 46.85,
+    "created_at": "2025-04-27T17:32:41.282Z",
+    "status": "IN_PROGRESS"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 16,
+  "fields": {
+    "driver": 2,
+    "current_location": "New York, NY",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": 2795.0,
+    "estimated_driving_time": 46.85,
+    "created_at": "2025-04-27T17:32:58.772Z",
+    "status": "NOT_STARTED"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 17,
+  "fields": {
+    "driver": null,
+    "current_location": "Seattle, WA",
+    "pickup_location": "Seattle, WA",
+    "dropoff_location": "Dallas, TX",
+    "current_cycle_used": 0.0,
+    "total_distance": 2186.58,
+    "estimated_driving_time": 35.26,
+    "created_at": "2025-04-27T21:00:15.420Z",
+    "status": "NOT_STARTED"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 18,
+  "fields": {
+    "driver": null,
+    "current_location": "Chicago, IL",
+    "pickup_location": "Chicago, IL",
+    "dropoff_location": "Miami, FL",
+    "current_cycle_used": 0.0,
+    "total_distance": 1353.16,
+    "estimated_driving_time": 25.69,
+    "created_at": "2025-04-27T21:00:25.165Z",
+    "status": "NOT_STARTED"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 19,
+  "fields": {
+    "driver": null,
+    "current_location": "Boston, MA",
+    "pickup_location": "Boston, MA",
+    "dropoff_location": "San Antonio, TX",
+    "current_cycle_used": 0.0,
+    "total_distance": 2039.18,
+    "estimated_driving_time": 36.34,
+    "created_at": "2025-04-27T21:00:34.726Z",
+    "status": "NOT_STARTED"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 20,
+  "fields": {
+    "driver": null,
+    "current_location": "Minneapolis, MN",
+    "pickup_location": "Minneapolis, MN",
+    "dropoff_location": "Phoenix, AZ",
+    "current_cycle_used": 0.0,
+    "total_distance": 1791.71,
+    "estimated_driving_time": 29.62,
+    "created_at": "2025-04-27T21:00:43.529Z",
+    "status": "NOT_STARTED"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 21,
+  "fields": {
+    "driver": null,
+    "current_location": "Denver, CO",
+    "pickup_location": "Denver, CO",
+    "dropoff_location": "Orlando, FL",
+    "current_cycle_used": 0.0,
+    "total_distance": 1843.66,
+    "estimated_driving_time": 32.01,
+    "created_at": "2025-04-27T21:00:52.188Z",
+    "status": "NOT_STARTED"
+  }
+},
+{
+  "model": "hos.trip",
+  "pk": 23,
+  "fields": {
+    "driver": null,
+    "current_location": "New York, NY",
+    "pickup_location": "New York, NY",
+    "dropoff_location": "Los Angeles, CA",
+    "current_cycle_used": 0.0,
+    "total_distance": null,
+    "estimated_driving_time": null,
+    "created_at": "2025-04-27T22:52:02.439Z",
+    "status": "IN_PROGRESS"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 6,
+  "fields": {
+    "trip": 8,
+    "status": "ON",
+    "start_time": "2025-04-26T08:00:00Z",
+    "end_time": "2025-04-26T08:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 7,
+  "fields": {
+    "trip": 8,
+    "status": "D",
+    "start_time": "2025-04-26T08:30:00Z",
+    "end_time": "2025-04-26T12:30:00Z",
+    "location": "Pennsylvania, PA",
+    "remarks": "Driving session 1",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 8,
+  "fields": {
+    "trip": 8,
+    "status": "OFF",
+    "start_time": "2025-04-26T12:30:00Z",
+    "end_time": "2025-04-26T13:00:00Z",
+    "location": "Pennsylvania Rest Area",
+    "remarks": "30-min Break",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 9,
+  "fields": {
+    "trip": 8,
+    "status": "D",
+    "start_time": "2025-04-26T13:00:00Z",
+    "end_time": "2025-04-26T17:00:00Z",
+    "location": "Ohio, OH",
+    "remarks": "Driving session 2",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 10,
+  "fields": {
+    "trip": 8,
+    "status": "OFF",
+    "start_time": "2025-04-26T17:00:00Z",
+    "end_time": "2025-04-27T07:00:00Z",
+    "location": "Ohio Truck Stop",
+    "remarks": "Sleeper berth/rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 11,
+  "fields": {
+    "trip": 8,
+    "status": "ON",
+    "start_time": "2025-04-27T07:00:00Z",
+    "end_time": "2025-04-27T07:30:00Z",
+    "location": "Ohio, OH",
+    "remarks": "Pre-trip inspection",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 12,
+  "fields": {
+    "trip": 8,
+    "status": "D",
+    "start_time": "2025-04-27T07:30:00Z",
+    "end_time": "2025-04-27T11:30:00Z",
+    "location": "Indiana, IN",
+    "remarks": "Driving session 1",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 13,
+  "fields": {
+    "trip": 8,
+    "status": "OFF",
+    "start_time": "2025-04-27T11:30:00Z",
+    "end_time": "2025-04-27T12:00:00Z",
+    "location": "Indiana Rest Area",
+    "remarks": "30-min break",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 14,
+  "fields": {
+    "trip": 8,
+    "status": "D",
+    "start_time": "2025-04-27T12:00:00Z",
+    "end_time": "2025-04-27T17:00:00Z",
+    "location": "Illinois, IL",
+    "remarks": "Driving session 2",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 15,
+  "fields": {
+    "trip": 8,
+    "status": "OFF",
+    "start_time": "2025-04-27T17:00:00Z",
+    "end_time": "2025-04-28T07:00:00Z",
+    "location": "Kansas City, MO",
+    "remarks": "Sleeper berth/rest",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 16,
+  "fields": {
+    "trip": 8,
+    "status": "ON",
+    "start_time": "2025-04-28T07:00:00Z",
+    "end_time": "2025-04-28T07:30:00Z",
+    "location": "Kansas City, MO",
+    "remarks": "Pre-trip inspection",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 17,
+  "fields": {
+    "trip": 8,
+    "status": "D",
+    "start_time": "2025-04-28T07:30:00Z",
+    "end_time": "2025-04-28T11:30:00Z",
+    "location": "Kansas, KS",
+    "remarks": "Driving session 1",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 18,
+  "fields": {
+    "trip": 8,
+    "status": "OFF",
+    "start_time": "2025-04-28T11:30:00Z",
+    "end_time": "2025-04-28T12:00:00Z",
+    "location": "Kansas Rest Area",
+    "remarks": "30-min break",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 19,
+  "fields": {
+    "trip": 8,
+    "status": "D",
+    "start_time": "2025-04-28T12:00:00Z",
+    "end_time": "2025-04-28T17:00:00Z",
+    "location": "Colorado, CO",
+    "remarks": "Driving session 2",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 20,
+  "fields": {
+    "trip": 8,
+    "status": "OFF",
+    "start_time": "2025-04-28T17:00:00Z",
+    "end_time": "2025-04-29T07:00:00Z",
+    "location": "Denver, CO",
+    "remarks": "Sleeper berth/rest",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 21,
+  "fields": {
+    "trip": 8,
+    "status": "ON",
+    "start_time": "2025-04-29T07:00:00Z",
+    "end_time": "2025-04-29T07:30:00Z",
+    "location": "Denver, CO",
+    "remarks": "Pre-trip inspection",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 22,
+  "fields": {
+    "trip": 8,
+    "status": "D",
+    "start_time": "2025-04-29T07:30:00Z",
+    "end_time": "2025-04-29T11:30:00Z",
+    "location": "Utah, UT",
+    "remarks": "Driving session 1",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 23,
+  "fields": {
+    "trip": 8,
+    "status": "OFF",
+    "start_time": "2025-04-29T11:30:00Z",
+    "end_time": "2025-04-29T12:00:00Z",
+    "location": "Utah Rest Area",
+    "remarks": "30-min break",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 24,
+  "fields": {
+    "trip": 8,
+    "status": "D",
+    "start_time": "2025-04-29T12:00:00Z",
+    "end_time": "2025-04-29T17:00:00Z",
+    "location": "Nevada, NV",
+    "remarks": "Driving session 2",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 25,
+  "fields": {
+    "trip": 8,
+    "status": "OFF",
+    "start_time": "2025-04-29T17:00:00Z",
+    "end_time": "2025-04-30T07:00:00Z",
+    "location": "Las Vegas, NV",
+    "remarks": "Sleeper berth/rest",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 26,
+  "fields": {
+    "trip": 8,
+    "status": "ON",
+    "start_time": "2025-04-30T07:00:00Z",
+    "end_time": "2025-04-30T07:30:00Z",
+    "location": "Las Vegas, NV",
+    "remarks": "Pre-trip inspection",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 27,
+  "fields": {
+    "trip": 8,
+    "status": "D",
+    "start_time": "2025-04-30T07:30:00Z",
+    "end_time": "2025-04-30T10:30:00Z",
+    "location": "Los Angeles, CA",
+    "remarks": "Final drive to destination",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 28,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-26T07:00:00Z",
+    "end_time": "2025-04-26T07:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 29,
+  "fields": {
+    "trip": 9,
+    "status": "ON",
+    "start_time": "2025-04-26T07:30:00Z",
+    "end_time": "2025-04-26T08:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 30,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-26T08:00:00Z",
+    "end_time": "2025-04-26T12:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 31,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-26T12:00:00Z",
+    "end_time": "2025-04-26T12:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / 30-min break",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 32,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-26T12:30:00Z",
+    "end_time": "2025-04-26T18:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 33,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-26T18:30:00Z",
+    "end_time": "2025-04-26T19:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking and shutdown",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 34,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-26T19:00:00Z",
+    "end_time": "2025-04-27T05:00:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper Berth Rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 35,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-27T05:00:00Z",
+    "end_time": "2025-04-27T05:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 36,
+  "fields": {
+    "trip": 9,
+    "status": "ON",
+    "start_time": "2025-04-27T05:30:00Z",
+    "end_time": "2025-04-27T06:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 37,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-27T06:00:00Z",
+    "end_time": "2025-04-27T10:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 38,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-27T10:00:00Z",
+    "end_time": "2025-04-27T10:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / 30-min break",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 39,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-27T10:30:00Z",
+    "end_time": "2025-04-27T16:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 40,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-27T16:30:00Z",
+    "end_time": "2025-04-27T17:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking and shutdown",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 41,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-27T17:00:00Z",
+    "end_time": "2025-04-28T03:00:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper Berth Rest",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 42,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-28T03:00:00Z",
+    "end_time": "2025-04-28T03:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 43,
+  "fields": {
+    "trip": 9,
+    "status": "ON",
+    "start_time": "2025-04-28T03:30:00Z",
+    "end_time": "2025-04-28T04:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 44,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-28T04:00:00Z",
+    "end_time": "2025-04-28T08:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 45,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-28T08:00:00Z",
+    "end_time": "2025-04-28T08:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / 30-min break",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 46,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-28T08:30:00Z",
+    "end_time": "2025-04-28T14:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 47,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-28T14:30:00Z",
+    "end_time": "2025-04-28T15:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking and shutdown",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 48,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-28T15:00:00Z",
+    "end_time": "2025-04-29T01:00:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper Berth Rest",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 49,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-29T01:00:00Z",
+    "end_time": "2025-04-29T01:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 50,
+  "fields": {
+    "trip": 9,
+    "status": "ON",
+    "start_time": "2025-04-29T01:30:00Z",
+    "end_time": "2025-04-29T02:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 51,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-29T02:00:00Z",
+    "end_time": "2025-04-29T06:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 52,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-29T06:00:00Z",
+    "end_time": "2025-04-29T06:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / 30-min break",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 53,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-29T06:30:00Z",
+    "end_time": "2025-04-29T12:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 54,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-29T12:30:00Z",
+    "end_time": "2025-04-29T13:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking and shutdown",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 55,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-29T13:00:00Z",
+    "end_time": "2025-04-29T23:00:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper Berth Rest",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 56,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-29T23:00:00Z",
+    "end_time": "2025-04-29T23:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 57,
+  "fields": {
+    "trip": 9,
+    "status": "ON",
+    "start_time": "2025-04-29T23:30:00Z",
+    "end_time": "2025-04-30T00:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 58,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-30T00:00:00Z",
+    "end_time": "2025-04-30T04:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 59,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-30T04:00:00Z",
+    "end_time": "2025-04-30T04:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / 30-min break",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 60,
+  "fields": {
+    "trip": 9,
+    "status": "D",
+    "start_time": "2025-04-30T04:30:00Z",
+    "end_time": "2025-04-30T07:10:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 61,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-30T07:10:00Z",
+    "end_time": "2025-04-30T07:40:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking and shutdown",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 62,
+  "fields": {
+    "trip": 9,
+    "status": "OFF",
+    "start_time": "2025-04-30T07:40:00Z",
+    "end_time": "2025-04-30T17:40:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper Berth Rest",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 63,
+  "fields": {
+    "trip": 10,
+    "status": "OFF",
+    "start_time": "2025-04-26T07:00:00Z",
+    "end_time": "2025-04-26T07:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 64,
+  "fields": {
+    "trip": 10,
+    "status": "ON",
+    "start_time": "2025-04-26T07:30:00Z",
+    "end_time": "2025-04-26T08:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 65,
+  "fields": {
+    "trip": 10,
+    "status": "D",
+    "start_time": "2025-04-26T08:00:00Z",
+    "end_time": "2025-04-26T12:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 66,
+  "fields": {
+    "trip": 10,
+    "status": "OFF",
+    "start_time": "2025-04-26T12:00:00Z",
+    "end_time": "2025-04-26T12:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 67,
+  "fields": {
+    "trip": 10,
+    "status": "D",
+    "start_time": "2025-04-26T12:30:00Z",
+    "end_time": "2025-04-26T18:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 68,
+  "fields": {
+    "trip": 10,
+    "status": "ON",
+    "start_time": "2025-04-26T18:30:00Z",
+    "end_time": "2025-04-26T19:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 69,
+  "fields": {
+    "trip": 10,
+    "status": "OFF",
+    "start_time": "2025-04-26T19:00:00Z",
+    "end_time": "2025-04-26T19:30:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 70,
+  "fields": {
+    "trip": 10,
+    "status": "SB",
+    "start_time": "2025-04-26T19:30:00Z",
+    "end_time": "2025-04-27T05:30:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 71,
+  "fields": {
+    "trip": 11,
+    "status": "OFF",
+    "start_time": "2025-04-26T00:00:00Z",
+    "end_time": "2025-04-26T07:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Off duty before trip start",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 72,
+  "fields": {
+    "trip": 11,
+    "status": "OFF",
+    "start_time": "2025-04-26T07:00:00Z",
+    "end_time": "2025-04-26T07:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 73,
+  "fields": {
+    "trip": 11,
+    "status": "ON",
+    "start_time": "2025-04-26T07:30:00Z",
+    "end_time": "2025-04-26T08:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 74,
+  "fields": {
+    "trip": 11,
+    "status": "D",
+    "start_time": "2025-04-26T08:00:00Z",
+    "end_time": "2025-04-26T12:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 75,
+  "fields": {
+    "trip": 11,
+    "status": "OFF",
+    "start_time": "2025-04-26T12:00:00Z",
+    "end_time": "2025-04-26T12:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 76,
+  "fields": {
+    "trip": 11,
+    "status": "D",
+    "start_time": "2025-04-26T12:30:00Z",
+    "end_time": "2025-04-26T18:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 77,
+  "fields": {
+    "trip": 11,
+    "status": "ON",
+    "start_time": "2025-04-26T18:30:00Z",
+    "end_time": "2025-04-26T19:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 78,
+  "fields": {
+    "trip": 11,
+    "status": "OFF",
+    "start_time": "2025-04-26T19:00:00Z",
+    "end_time": "2025-04-26T19:30:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 79,
+  "fields": {
+    "trip": 11,
+    "status": "SB",
+    "start_time": "2025-04-26T19:30:00Z",
+    "end_time": "2025-04-27T05:30:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 80,
+  "fields": {
+    "trip": 12,
+    "status": "OFF",
+    "start_time": "2025-04-26T00:00:00Z",
+    "end_time": "2025-04-26T07:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Off duty before trip start",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 81,
+  "fields": {
+    "trip": 12,
+    "status": "OFF",
+    "start_time": "2025-04-26T07:00:00Z",
+    "end_time": "2025-04-26T07:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 82,
+  "fields": {
+    "trip": 12,
+    "status": "ON",
+    "start_time": "2025-04-26T07:30:00Z",
+    "end_time": "2025-04-26T08:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 83,
+  "fields": {
+    "trip": 12,
+    "status": "D",
+    "start_time": "2025-04-26T08:00:00Z",
+    "end_time": "2025-04-26T12:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 84,
+  "fields": {
+    "trip": 12,
+    "status": "OFF",
+    "start_time": "2025-04-26T12:00:00Z",
+    "end_time": "2025-04-26T12:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 85,
+  "fields": {
+    "trip": 12,
+    "status": "D",
+    "start_time": "2025-04-26T12:30:00Z",
+    "end_time": "2025-04-26T18:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 86,
+  "fields": {
+    "trip": 12,
+    "status": "ON",
+    "start_time": "2025-04-26T18:30:00Z",
+    "end_time": "2025-04-26T19:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 87,
+  "fields": {
+    "trip": 12,
+    "status": "OFF",
+    "start_time": "2025-04-26T19:00:00Z",
+    "end_time": "2025-04-26T19:30:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 88,
+  "fields": {
+    "trip": 12,
+    "status": "SB",
+    "start_time": "2025-04-26T19:30:00Z",
+    "end_time": "2025-04-27T05:30:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 89,
+  "fields": {
+    "trip": 13,
+    "status": "OFF",
+    "start_time": "2025-04-26T00:00:00Z",
+    "end_time": "2025-04-26T07:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Off duty before trip start",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 90,
+  "fields": {
+    "trip": 13,
+    "status": "OFF",
+    "start_time": "2025-04-26T07:00:00Z",
+    "end_time": "2025-04-26T07:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 91,
+  "fields": {
+    "trip": 13,
+    "status": "ON",
+    "start_time": "2025-04-26T07:30:00Z",
+    "end_time": "2025-04-26T08:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 92,
+  "fields": {
+    "trip": 13,
+    "status": "D",
+    "start_time": "2025-04-26T08:00:00Z",
+    "end_time": "2025-04-26T12:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 93,
+  "fields": {
+    "trip": 13,
+    "status": "OFF",
+    "start_time": "2025-04-26T12:00:00Z",
+    "end_time": "2025-04-26T12:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 94,
+  "fields": {
+    "trip": 13,
+    "status": "D",
+    "start_time": "2025-04-26T12:30:00Z",
+    "end_time": "2025-04-26T18:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 95,
+  "fields": {
+    "trip": 13,
+    "status": "ON",
+    "start_time": "2025-04-26T18:30:00Z",
+    "end_time": "2025-04-26T19:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 96,
+  "fields": {
+    "trip": 13,
+    "status": "OFF",
+    "start_time": "2025-04-26T19:00:00Z",
+    "end_time": "2025-04-26T19:30:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 97,
+  "fields": {
+    "trip": 13,
+    "status": "SB",
+    "start_time": "2025-04-26T19:30:00Z",
+    "end_time": "2025-04-27T05:30:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 98,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-26T00:00:00Z",
+    "end_time": "2025-04-26T07:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Off duty before trip start",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 99,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-26T07:00:00Z",
+    "end_time": "2025-04-26T07:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 100,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-26T07:30:00Z",
+    "end_time": "2025-04-26T08:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 101,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-26T08:00:00Z",
+    "end_time": "2025-04-26T12:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 102,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-26T12:00:00Z",
+    "end_time": "2025-04-26T12:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 103,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-26T12:30:00Z",
+    "end_time": "2025-04-26T18:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 104,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-26T18:30:00Z",
+    "end_time": "2025-04-26T19:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 105,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-26T19:00:00Z",
+    "end_time": "2025-04-26T19:30:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 106,
+  "fields": {
+    "trip": 14,
+    "status": "SB",
+    "start_time": "2025-04-26T19:30:00Z",
+    "end_time": "2025-04-27T00:00:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 107,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-27T00:00:00Z",
+    "end_time": "2025-04-27T00:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 108,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-27T00:30:00Z",
+    "end_time": "2025-04-27T01:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 109,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-27T01:00:00Z",
+    "end_time": "2025-04-27T05:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 110,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-27T05:00:00Z",
+    "end_time": "2025-04-27T05:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 111,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-27T05:30:00Z",
+    "end_time": "2025-04-27T11:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 112,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-27T11:30:00Z",
+    "end_time": "2025-04-27T12:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 113,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-27T12:00:00Z",
+    "end_time": "2025-04-27T12:30:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 114,
+  "fields": {
+    "trip": 14,
+    "status": "SB",
+    "start_time": "2025-04-27T12:30:00Z",
+    "end_time": "2025-04-28T00:00:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 115,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-28T00:00:00Z",
+    "end_time": "2025-04-28T00:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 116,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-28T00:30:00Z",
+    "end_time": "2025-04-28T01:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 117,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-28T01:00:00Z",
+    "end_time": "2025-04-28T05:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 118,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-28T05:00:00Z",
+    "end_time": "2025-04-28T05:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 119,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-28T05:30:00Z",
+    "end_time": "2025-04-28T11:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 120,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-28T11:30:00Z",
+    "end_time": "2025-04-28T12:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 121,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-28T12:00:00Z",
+    "end_time": "2025-04-28T12:30:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 122,
+  "fields": {
+    "trip": 14,
+    "status": "SB",
+    "start_time": "2025-04-28T12:30:00Z",
+    "end_time": "2025-04-29T00:00:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 123,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-29T00:00:00Z",
+    "end_time": "2025-04-29T00:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 124,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-29T00:30:00Z",
+    "end_time": "2025-04-29T01:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 125,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-29T01:00:00Z",
+    "end_time": "2025-04-29T05:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 126,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-29T05:00:00Z",
+    "end_time": "2025-04-29T05:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 127,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-29T05:30:00Z",
+    "end_time": "2025-04-29T11:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 128,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-29T11:30:00Z",
+    "end_time": "2025-04-29T12:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 129,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-29T12:00:00Z",
+    "end_time": "2025-04-29T12:30:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 130,
+  "fields": {
+    "trip": 14,
+    "status": "SB",
+    "start_time": "2025-04-29T12:30:00Z",
+    "end_time": "2025-04-30T00:00:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-29"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 131,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-30T00:00:00Z",
+    "end_time": "2025-04-30T00:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 132,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-30T00:30:00Z",
+    "end_time": "2025-04-30T01:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 133,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-30T01:00:00Z",
+    "end_time": "2025-04-30T05:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 134,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-30T05:00:00Z",
+    "end_time": "2025-04-30T05:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 135,
+  "fields": {
+    "trip": 14,
+    "status": "D",
+    "start_time": "2025-04-30T05:30:00Z",
+    "end_time": "2025-04-30T08:10:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 136,
+  "fields": {
+    "trip": 14,
+    "status": "ON",
+    "start_time": "2025-04-30T08:10:00Z",
+    "end_time": "2025-04-30T08:40:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 137,
+  "fields": {
+    "trip": 14,
+    "status": "OFF",
+    "start_time": "2025-04-30T08:40:00Z",
+    "end_time": "2025-04-30T09:10:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 138,
+  "fields": {
+    "trip": 14,
+    "status": "SB",
+    "start_time": "2025-04-30T09:10:00Z",
+    "end_time": "2025-05-01T00:00:00Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-30"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 139,
+  "fields": {
+    "trip": 15,
+    "status": "OFF",
+    "start_time": "2025-04-27T21:00:48.431Z",
+    "end_time": "2025-04-27T21:30:48.431Z",
+    "location": "New York, NY",
+    "remarks": "Off duty before trip start",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 140,
+  "fields": {
+    "trip": 15,
+    "status": "ON",
+    "start_time": "2025-04-27T21:30:02.300Z",
+    "end_time": "2025-04-27T22:00:02.300Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 141,
+  "fields": {
+    "trip": 15,
+    "status": "D",
+    "start_time": "2025-04-27T22:00:59.972Z",
+    "end_time": "2025-04-28T05:00:59.972Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 142,
+  "fields": {
+    "trip": 15,
+    "status": "OFF",
+    "start_time": "2025-04-28T05:00:18.843Z",
+    "end_time": "2025-04-28T05:40:18.843Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 184,
+  "fields": {
+    "trip": 23,
+    "status": "OFF",
+    "start_time": "2025-04-26T00:00:00Z",
+    "end_time": "2025-04-26T00:30:00Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 185,
+  "fields": {
+    "trip": 23,
+    "status": "ON",
+    "start_time": "2025-04-26T00:30:00Z",
+    "end_time": "2025-04-26T01:00:00Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 186,
+  "fields": {
+    "trip": 23,
+    "status": "D",
+    "start_time": "2025-04-26T01:00:00Z",
+    "end_time": "2025-04-26T05:00:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 187,
+  "fields": {
+    "trip": 23,
+    "status": "OFF",
+    "start_time": "2025-04-26T05:00:00Z",
+    "end_time": "2025-04-26T05:30:00Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 188,
+  "fields": {
+    "trip": 23,
+    "status": "D",
+    "start_time": "2025-04-26T05:30:00Z",
+    "end_time": "2025-04-26T11:30:00Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 189,
+  "fields": {
+    "trip": 23,
+    "status": "ON",
+    "start_time": "2025-04-26T11:30:00Z",
+    "end_time": "2025-04-26T12:00:00Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 190,
+  "fields": {
+    "trip": 23,
+    "status": "OFF",
+    "start_time": "2025-04-26T12:00:00Z",
+    "end_time": "2025-04-26T12:30:00Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 191,
+  "fields": {
+    "trip": 23,
+    "status": "SB",
+    "start_time": "2025-04-26T12:30:00Z",
+    "end_time": "2025-04-26T23:59:59.999Z",
+    "location": "Truck Stop Sleeper",
+    "remarks": "Sleeper berth rest",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 192,
+  "fields": {
+    "trip": 23,
+    "status": "OFF",
+    "start_time": "2025-04-26T23:59:59.999Z",
+    "end_time": "2025-04-27T00:29:59.999Z",
+    "location": "New York, NY",
+    "remarks": "Morning routine / Breakfast",
+    "date": "2025-04-26"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 193,
+  "fields": {
+    "trip": 23,
+    "status": "ON",
+    "start_time": "2025-04-27T00:29:59.999Z",
+    "end_time": "2025-04-27T00:59:59.999Z",
+    "location": "New York, NY",
+    "remarks": "Pre-trip TIV Inspection",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 194,
+  "fields": {
+    "trip": 23,
+    "status": "D",
+    "start_time": "2025-04-27T00:59:59.999Z",
+    "end_time": "2025-04-27T04:59:59.999Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 195,
+  "fields": {
+    "trip": 23,
+    "status": "OFF",
+    "start_time": "2025-04-27T04:59:59.999Z",
+    "end_time": "2025-04-27T05:29:59.999Z",
+    "location": "Rest Area",
+    "remarks": "Fuel stop / Break",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 196,
+  "fields": {
+    "trip": 23,
+    "status": "D",
+    "start_time": "2025-04-27T05:29:59.999Z",
+    "end_time": "2025-04-27T11:29:59.999Z",
+    "location": "Highway",
+    "remarks": "Driving session 2",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 197,
+  "fields": {
+    "trip": 23,
+    "status": "ON",
+    "start_time": "2025-04-27T11:29:59.999Z",
+    "end_time": "2025-04-27T11:59:59.999Z",
+    "location": "Truck Stop",
+    "remarks": "Post-trip TIV Inspection",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 198,
+  "fields": {
+    "trip": 23,
+    "status": "OFF",
+    "start_time": "2025-04-27T11:59:59.999Z",
+    "end_time": "2025-04-27T12:29:59.999Z",
+    "location": "Truck Stop",
+    "remarks": "Parking, meal and rest",
+    "date": "2025-04-27"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 239,
+  "fields": {
+    "trip": 15,
+    "status": "ON",
+    "start_time": "2025-04-28T05:40:55.140Z",
+    "end_time": "2025-04-28T06:00:55.140Z",
+    "location": "Scale stop",
+    "remarks": "Scaling the truck",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.drivinglog",
+  "pk": 240,
+  "fields": {
+    "trip": 15,
+    "status": "D",
+    "start_time": "2025-04-28T06:00:54.981Z",
+    "end_time": "2025-04-28T11:00:54.981Z",
+    "location": "Highway",
+    "remarks": "Driving session 1",
+    "date": "2025-04-28"
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 5,
+  "fields": {
+    "trip": 8,
+    "date": "2025-04-26",
+    "driving_hours": 8.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 14.5,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 6,
+  "fields": {
+    "trip": 8,
+    "date": "2025-04-27",
+    "driving_hours": 9.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 14.5,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 7,
+  "fields": {
+    "trip": 8,
+    "date": "2025-04-28",
+    "driving_hours": 9.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 14.5,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 8,
+  "fields": {
+    "trip": 8,
+    "date": "2025-04-29",
+    "driving_hours": 9.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 14.5,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 9,
+  "fields": {
+    "trip": 8,
+    "date": "2025-04-30",
+    "driving_hours": 3.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 0.0,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 10,
+  "fields": {
+    "trip": 9,
+    "date": "2025-04-26",
+    "driving_hours": 10.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 11.5,
+    "sleeper_berth_hours": 10.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 11,
+  "fields": {
+    "trip": 9,
+    "date": "2025-04-27",
+    "driving_hours": 10.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 11.5,
+    "sleeper_berth_hours": 10.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 12,
+  "fields": {
+    "trip": 9,
+    "date": "2025-04-28",
+    "driving_hours": 10.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 11.5,
+    "sleeper_berth_hours": 10.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 13,
+  "fields": {
+    "trip": 9,
+    "date": "2025-04-29",
+    "driving_hours": 10.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 11.5,
+    "sleeper_berth_hours": 10.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 14,
+  "fields": {
+    "trip": 9,
+    "date": "2025-04-29",
+    "driving_hours": 10.0,
+    "on_duty_hours": 1.0,
+    "off_duty_hours": 12.0,
+    "sleeper_berth_hours": 10.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 15,
+  "fields": {
+    "trip": 8,
+    "date": "2025-04-30",
+    "driving_hours": 3.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 0.0,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 16,
+  "fields": {
+    "trip": 9,
+    "date": "2025-04-30",
+    "driving_hours": 6.666666666666666,
+    "on_duty_hours": 0.0,
+    "off_duty_hours": 11.0,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 17,
+  "fields": {
+    "trip": 9,
+    "date": "2025-04-29",
+    "driving_hours": 10.0,
+    "on_duty_hours": 1.0,
+    "off_duty_hours": 12.0,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 18,
+  "fields": {
+    "trip": 9,
+    "date": "2025-04-27",
+    "driving_hours": 10.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 11.5,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 19,
+  "fields": {
+    "trip": 9,
+    "date": "2025-04-27",
+    "driving_hours": 10.0,
+    "on_duty_hours": 0.5,
+    "off_duty_hours": 11.5,
+    "sleeper_berth_hours": 0.0
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 20,
+  "fields": {
+    "trip": 14,
+    "date": "2025-04-26",
+    "driving_hours": 10.0,
+    "on_duty_hours": 1.0,
+    "off_duty_hours": 8.5,
+    "sleeper_berth_hours": 4.5
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 21,
+  "fields": {
+    "trip": 14,
+    "date": "2025-04-27",
+    "driving_hours": 10.0,
+    "on_duty_hours": 1.0,
+    "off_duty_hours": 1.5,
+    "sleeper_berth_hours": 11.5
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 22,
+  "fields": {
+    "trip": 14,
+    "date": "2025-04-28",
+    "driving_hours": 10.0,
+    "on_duty_hours": 1.0,
+    "off_duty_hours": 1.5,
+    "sleeper_berth_hours": 11.5
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 23,
+  "fields": {
+    "trip": 14,
+    "date": "2025-04-29",
+    "driving_hours": 10.0,
+    "on_duty_hours": 1.0,
+    "off_duty_hours": 1.5,
+    "sleeper_berth_hours": 11.5
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 24,
+  "fields": {
+    "trip": 14,
+    "date": "2025-04-30",
+    "driving_hours": 6.67,
+    "on_duty_hours": 1.0,
+    "off_duty_hours": 1.5,
+    "sleeper_berth_hours": 14.83
+  }
+},
+{
+  "model": "hos.dailylogsheet",
+  "pk": 30,
+  "fields": {
+    "trip": 23,
+    "date": "2025-04-26",
+    "driving_hours": 10.0,
+    "on_duty_hours": 1.0,
+    "off_duty_hours": 1.5,
+    "sleeper_berth_hours": 11.5
+  }
+}
+]

@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 from dotenv import load_dotenv
+import urllib.parse
 
 # Load environment variables
 load_dotenv()
@@ -85,21 +86,24 @@ WSGI_APPLICATION = 'Spotter_HOS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# Get the base directory for the database
-DB_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
-
-# Ensure the directory exists
-os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': DB_PATH,
-        'OPTIONS': {
-            'timeout': 20,  # in seconds
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DATABASE', 'postgres'),
+        'USER': os.getenv('POSTGRES_USER', 'postgres.xekjpverqkcpkpsqtrpq'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'S9BeX2GH7*3R!z9'),
+        'HOST': os.getenv('POSTGRES_HOST', 'aws-0-eu-central-1.pooler.supabase.com'),
+        'PORT': os.getenv('POSTGRES_PORT', '6543'),
     }
 }
+
+# Comment out SQLite configuration for now
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -156,7 +160,7 @@ REST_FRAMEWORK = {
 }
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "https://spotter-hos-frontend.vercel.app",

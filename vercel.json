@@ -5,8 +5,7 @@
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "15mb",
-        "runtime": "python3.11",
-        "includeFiles": ["**/*.sqlite3"]
+        "runtime": "python3.11"
       }
     }
   ],
@@ -22,6 +21,11 @@
   ],
   "env": {
     "PYTHONPATH": ".",
-    "DJANGO_SETTINGS_MODULE": "Spotter_HOS.settings"
+    "DJANGO_SETTINGS_MODULE": "Spotter_HOS.settings",
+    "POSTGRES_DATABASE": "postgres",
+    "POSTGRES_USER": "postgres.xekjpverqkcpkpsqtrpq",
+    "POSTGRES_PASSWORD": "S9BeX2GH7*3R!z9",
+    "POSTGRES_HOST": "aws-0-eu-central-1.pooler.supabase.com",
+    "POSTGRES_PORT": "6543"
   }
 }
