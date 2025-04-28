@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-#d+@(#3z6bt((3(8576g94an6s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ["http://localhost:3000","https://spotter-hos-frontend.vercel.app", '.vercel.app', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.vercel.app', 'spotter-hos-backend.vercel.app']
 
 
 # Application definition
@@ -163,6 +163,7 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
     "https://spotter-hos-frontend.vercel.app",
 ]
 
@@ -187,6 +188,12 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+# Expose headers
+CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+
+# Preflight settings
+CORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours
 
 # Security settings
 SECURE_SSL_REDIRECT = True
