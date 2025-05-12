@@ -739,6 +739,10 @@ class AddLogView(APIView):
             if trip.status == 'COMPLETED':
                 return Response({"error": "Cannot add logs to completed trips"}, status=status.HTTP_400_BAD_REQUEST)
 
+            # Add default remark if empty
+            if not request.data.get('remarks'):
+                request.data['remarks'] = f"{request.data.get('status', '')} status log"
+
             serializer = DrivingLogSerializer(data=request.data)
             if serializer.is_valid():
                 log = serializer.save(trip=trip)  # attach trip directly here
@@ -780,17 +784,19 @@ class AddLogView(APIView):
                 async_to_sync(channel_layer.group_send)(
                     f'trip_{trip.id}',
                     {
-                        'type': 'log_update',
+                        'type': 'log_created',
                         'log': log_data
                     }
                 )
-
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                
+                return Response(DrivingLogSerializer(log).data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         except Trip.DoesNotExist:
             return Response({"error": "Trip not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class DailyLogView(APIView):
     permission_classes = [IsAuthenticated, IsTripDriver]
