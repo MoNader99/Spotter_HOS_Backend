@@ -26,10 +26,20 @@ class TripSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Trip
-        fields = '__all__'
+        fields = [
+            'id', 'pickup_location', 'dropoff_location',
+            'current_location', 'current_cycle_used',
+            'total_distance', 'estimated_driving_time',
+            'created_at', 'status', 'driver', 'logs',
+            'daily_logs', 'auto_assign', 'pickup_coordinates',
+            'dropoff_coordinates'
+        ]
+        read_only_fields = ['driver', 'status']
         extra_kwargs = {
             'driver': {'required': False},  # Make driver optional
-            'current_cycle_used': {'required': False}  # Also optional
+            'current_cycle_used': {'required': False},  # Also optional
+            'pickup_coordinates': {'required': False},  # Optional
+            'dropoff_coordinates': {'required': False}  # Optional
         }
 
 class SimplifiedTripSerializer(serializers.ModelSerializer):

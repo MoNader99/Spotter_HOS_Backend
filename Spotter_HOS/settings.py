@@ -94,10 +94,13 @@ DATABASES = {
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'S9BeX2GH7*3R!z9'),
         'HOST': os.getenv('POSTGRES_HOST', 'aws-0-eu-central-1.pooler.supabase.com'),
         'PORT': os.getenv('POSTGRES_PORT', '6543'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 
-# Comment out SQLite configuration for now
+# Comment out SQLite configuration
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -160,7 +163,7 @@ REST_FRAMEWORK = {
 }
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True  # Temporarily allow all origins for development
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -187,18 +190,27 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+    'access-control-allow-origin',
+    'access-control-allow-headers',
+    'access-control-allow-methods',
 ]
 
 # Expose headers
-CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+CORS_EXPOSE_HEADERS = [
+    'Content-Type', 
+    'X-CSRFToken',
+    'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Methods'
+]
 
 # Preflight settings
 CORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours
 
 # Security settings
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False  # Disable SSL redirect for local development
+SESSION_COOKIE_SECURE = False  # Allow non-HTTPS cookies for local development
+CSRF_COOKIE_SECURE = False  # Allow non-HTTPS CSRF cookies for local development
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
@@ -223,6 +235,7 @@ CHANNEL_LAYERS = {
 
 # Add CSRF trusted origins
 CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
     'https://spotter-hos-backend.vercel.app',
     'https://spotter-hos-frontend.vercel.app',
 ]

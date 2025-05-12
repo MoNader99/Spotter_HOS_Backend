@@ -4,7 +4,7 @@ from hos.views import (
     AddLogView, CompleteTripView, DailyLogView, TripCreateView, 
     TripDetailView, TripRouteView, TripDailyLogsView, DailyLogGenerator,
     AssignTripView, AvailableTripsView, DriverTripsView, AllTripsView,
-    DriverAssignedTripsView
+    DriverAssignedTripsView, GenerateTripLogsView
 )
 from hos.auth import UserRegistrationView, UserLoginView, UserProfileView
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -35,4 +35,7 @@ urlpatterns = [
     re_path(r'^api/trips/(?P<pk>\d+)/generate-daily-log/$', 
             DailyLogGenerator.as_view(), 
             name='generate-daily-log'),
+    re_path(r'^api/trips/(?P<pk>\d+)/generate-logs/$',
+            GenerateTripLogsView.as_view(),
+            name='generate-trip-logs'),
 ]

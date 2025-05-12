@@ -16,6 +16,8 @@ class Trip(models.Model):
     current_location = models.CharField(max_length=255, null=True, blank=True)
     pickup_location = models.CharField(max_length=255)
     dropoff_location = models.CharField(max_length=255)
+    pickup_coordinates = models.JSONField(null=True, blank=True)  # Store as [lat, lng]
+    dropoff_coordinates = models.JSONField(null=True, blank=True)  # Store as [lat, lng]
     current_cycle_used = models.FloatField(
         validators=[MinValueValidator(0), MaxValueValidator(70)], 
         null=True, blank=True
@@ -24,6 +26,7 @@ class Trip(models.Model):
     estimated_driving_time = models.FloatField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=TRIP_STATUS_CHOICES, default='NOT_STARTED')
+    auto_assign = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.pickup_location} ➔ {self.dropoff_location} ({self.get_status_display()})"
